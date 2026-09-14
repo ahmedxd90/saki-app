@@ -96,7 +96,8 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await EasyLocalization.ensureInitialized();
+  try {
+    await EasyLocalization.ensureInitialized();
 
   ZegoUIKitPrebuiltCallInvitationService().setNavigatorKey(navigatorKey);
 
@@ -107,7 +108,7 @@ void main() async {
     MobileAds.instance.initialize();
   }
 
-  initPlatformState();
+  await initPlatformState();
 
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
       overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
@@ -178,6 +179,89 @@ void main() async {
         FirebaseCrashlytics.instance.recordFlutterFatalError;
   }
   await EasyLocalization.ensureInitialized();
+  await ZegoUIKit().initLog();
+  ZegoUIKitPrebuiltCallInvitationService().useSystemCallingUI(
+    [ZegoUIKitSignalingPlugin()],
+  );
+  runApp(
+    EasyLocalization(
+      supportedLocales: QuickHelp.getLanguages(Setup.languages),
+      path: 'assets/translations',
+      fallbackLocale: Locale(Setup.languages[0]),
+      child: App(),
+    ),
+  );
+  } catch (error, stackTrace) {
+    debugPrint('saki startup error: $error');
+    debugPrintStack(stackTrace: stackTrace);
+    runApp(StartupErrorApp(error: error));
+  }
+}
+
+class StartupErrorApp extends StatelessWidget {
+  const StartupErrorApp({super.key, required this.error});
+
+  final Object error;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: SafeArea(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.error_outline, size: 64, color: Colors.red),
+                  const SizedBox(height: 16),
+                  const Text(
+                    'تعذر تشغيل التطبيق',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
+                    'تحقق من الاتصال بالإنترنت ثم أعد المحاولة. إذا استمرت المشكلة أرسل صورة هذه الشاشة.',
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    error.toString(),
+                    maxLines: 6,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 11, color: Colors.grey),
+                  ),
+                  const SizedBox(height: 20),
+                  FilledButton(
+                    onPressed: () => main(),
+                    child: const Text('إعادة المحاولة'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/*
+  The app is started above after all required services are initialized.
+  Keeping the fallback screen here prevents a native-looking silent exit.
+*/
+/*
+  Zego UI initialization is awaited so startup exceptions are caught above.
+*/
+/*
+  Legacy callback body intentionally removed.
+*/
+/*
+  Original callback:
   ZegoUIKit().initLog().then((value) {
     ZegoUIKitPrebuiltCallInvitationService().useSystemCallingUI(
       [ZegoUIKitSignalingPlugin()],
@@ -191,7 +275,7 @@ void main() async {
       ),
     );
   });
-}
+*/
 
 Future<void> initPlatformState() async {
   if (Setup.isDebug && !QuickHelp.isWebPlatform()) {
