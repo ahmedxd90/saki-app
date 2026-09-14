@@ -173,9 +173,6 @@ void main() async {
     registeredSubClassMap: subClassMap,
   );
 
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-
   if(!QuickHelp.isWebPlatform()) {
     FlutterError.onError =
         FirebaseCrashlytics.instance.recordFlutterFatalError;
@@ -208,7 +205,9 @@ Future<void> initPlatformState() async {
   } else if (QuickHelp.isIOSPlatform()) {
     configuration = PurchasesConfiguration(Config.publicIosSdkKey);
   }
-  if(!QuickHelp.isWebPlatform()) {
+  if(!QuickHelp.isWebPlatform() &&
+      configuration != null &&
+      configuration!.apiKey.isNotEmpty) {
     await Purchases.configure(configuration!);
   }
 }
