@@ -1,0 +1,44 @@
+# Flutter / Dart
+app/.dart_tool/
+app/.flutter-plugins
+app/.flutter-plugins-dependencies
+app/.packages
+app/build/
+app/.pub-cache/
+app/env/
+app/android/.gradle/
+app/android/local.properties
+app/ios/Pods/
+app/ios/.symlinks/
+app/ios/Flutter/ephemeral/
+app/ios/Flutter/Generated.xcconfig
+app/ios/Flutter/flutter_export_environment.sh
+
+# Secrets and signing files
+.env
+.env.*
+!.env.example
+**/key.properties
+**/*.jks
+**/*.keystore
+**/google-services.json
+**/GoogleService-Info.plist
+
+# Node / PHP generated dependencies
+admin/node_modules/
+admin/vendor/
+admin/error_log
+
+# OS/editor files
+.DS_Store
+._*
+.idea/
+.vscode/
+*.swp
+
+# Build artifacts
+*.apk
+*.aab
+*.log
+
+**/*.jks
