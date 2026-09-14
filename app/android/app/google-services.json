@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "164807497226",
+    "project_id": "saki-bab9f",
+    "storage_bucket": "saki-bab9f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:164807497226:android:d06498a7d49302ebc071f3",
+        "android_client_info": {
+          "package_name": "com.example.myapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "164807497226-sh52p1vm3p9big0clgpnaanhmtvckqdo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1cNktL-11tvQM657gushj9uepcstcldk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "164807497226-sh52p1vm3p9big0clgpnaanhmtvckqdo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:164807497226:android:70683ac77285a69dc071f3",
+        "android_client_info": {
+          "package_name": "com.saki.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "164807497226-sh52p1vm3p9big0clgpnaanhmtvckqdo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1cNktL-11tvQM657gushj9uepcstcldk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "164807497226-sh52p1vm3p9big0clgpnaanhmtvckqdo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
