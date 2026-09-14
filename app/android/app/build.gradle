@@ -112,7 +112,6 @@ dependencies {
     implementation 'androidx.core:core-splashscreen:1.0.1'
 }
 
-apply plugin: 'com.google.firebase.firebase-perf'
 
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
